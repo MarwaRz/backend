@@ -1,0 +1,35 @@
+services:
+  backend:
+    image: backend
+    container_name: backend
+    ports:
+      - "5000:5000"
+    restart: always
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI: mongodb://root:marwa_password@mongo:27017/devops
+      
+
+  frontend:
+    image: frontend
+    container_name: frontend
+    ports:
+      - "3000:80"
+    restart: always
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db  
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME: root
+      - MONGO_INITDB_ROOT_PASSWORD: marwa_password
+
+volumes:
+  mongo-data:
