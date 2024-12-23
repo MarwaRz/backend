@@ -33,6 +33,5 @@ services:
       MONGO_INITDB_DATABASE: devops
     command: mongod --auth --bind_ip_all --port 27017
 
-
 volumes:
   mongo-data:
